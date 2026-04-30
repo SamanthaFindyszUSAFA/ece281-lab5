@@ -41,7 +41,15 @@ end ALU;
 
 architecture Behavioral of ALU is
 
+    component ripple_adder is
+        Port ( A : in STD_LOGIC_VECTOR (7 downto 0);
+               B : in STD_LOGIC_VECTOR (7 downto 0);
+               Cin : in STD_LOGIC;
+               S : out STD_LOGIC_VECTOR (7 downto 0);
+               Cout : out STD_LOGIC);
+    end component ripple_adder;
+    
 begin
-
+    
 
 end Behavioral;

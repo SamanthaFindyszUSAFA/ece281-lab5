@@ -11,7 +11,7 @@ use IEEE.numeric_std.all;
 entity twos_comp is
     port (
         i_bin: in std_logic_vector(7 downto 0);
-        o_sign: out std_logic;
+        o_sign: out std_logic_vector(3 downto 0);
         o_hund: out std_logic_vector(3 downto 0);
         o_tens: out std_logic_vector(3 downto 0);
         o_ones: out std_logic_vector(3 downto 0)
@@ -26,10 +26,10 @@ begin
     begin
         binary_value := to_integer(signed(i_bin));
         if binary_value < 0 then
-            o_sign <= '1';
+            o_sign <= "0001";
             decimal_value := -binary_value;
         else
-            o_sign <= '0';
+            o_sign <= "0000";
             decimal_value := binary_value;
         end if;
         
