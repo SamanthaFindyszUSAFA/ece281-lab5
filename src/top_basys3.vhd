@@ -123,7 +123,7 @@ architecture top_basys3_arch of top_basys3 is
     constant k_IO_WIDTH : natural := 4;
     
     signal w_clk : std_logic;		--this wire provides the connection between o_clk and TDM4 clk
-    signal w_cycle : STD_LOGIC_VECTOR (3 downto 0) := "0000";
+    signal w_cycle : STD_LOGIC_VECTOR (3 downto 0) := "0001";
     signal w_btnC : std_logic;
 
     signal w_twos_comp_input : STD_LOGIC_VECTOR (7 downto 0);
@@ -195,20 +195,18 @@ begin
         );
         
     cycle_inst_A: cycle
-        generic map( k_SET => "0010") --???
         port map( 
             i_input => sw,
             i_reset => w_reset,
-            i_cycle => w_cycle,
+            i_cycle => w_cycle(1),
             o_output => w_load_A
         );
         
     cycle_inst_B: cycle
-        generic map( k_SET => "0100") --???
         port map( 
             i_input => sw,
             i_reset => w_reset,
-            i_cycle => w_cycle,
+            i_cycle => w_cycle(2),
             o_output => w_load_B
         );
         
@@ -256,8 +254,9 @@ begin
          "00000000" when others;
 
    
-   w_reset <= '1' when(btnU = '1' or w_cycle = "0000") else 
+   w_reset <= '1' when(btnU = '1') else 
    '0';
+   
    
     an(0) <= '0' when (w_sel = "1110") else '1';
     an(1) <= '0' when (w_sel = "1101") else '1';
@@ -265,6 +264,16 @@ begin
     an(3) <= '0' when (w_sel = "0111") else '1';
     
     led(11 downto 4) <= (others => '0');
+
+    led(3) <= w_cycle(3);
+    led(2) <= w_cycle(2);
+    led(1) <= w_cycle(1);
+    led(0) <= w_cycle(0);
+    --led(3) <= '1' when (w_cycle = "1000") else '0';
+    --led(2) <= '1' when (w_cycle = "0100") else '0';
+    --led(1) <= '1' when (w_cycle = "0010") else '0';
+    --led(0) <= '1' when (w_cycle = "0001") else '0';
+    
 	
 	
 end top_basys3_arch;

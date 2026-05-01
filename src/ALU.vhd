@@ -49,7 +49,42 @@ architecture Behavioral of ALU is
                Cout : out STD_LOGIC);
     end component ripple_adder;
     
+    
+    signal w_sum : STD_LOGIC_VECTOR (7 downto 0);
+    signal w_Cout : std_logic;
+    signal w_B : STD_LOGIC_VECTOR (7 downto 0);
+    signal w_result: STD_LOGIC_VECTOR (7 downto 0);
 begin
+
+    ripple_adder_inst : ripple_adder
+       port map (						  
+            A => i_A,
+            B => w_B,
+            Cin => i_op(0),
+            S => w_sum,
+            Cout => w_Cout
+        ); 
+    
+   	with i_op(1 downto 0) select 
+        w_result <=  
+         (i_A or i_B) when "11", 
+         (i_A and i_B) when "10",   
+          w_sum when others;
+        
+    with i_op(0) select 
+        w_B <=  
+         (not i_B) when '1', 
+         (i_B) when others;
+         
+    o_result <= w_result;
+        
+        --switch o_flags to w_flags
+        --or each together and then not them
+     o_flags(0) <= not (w_result(0) or w_result(1) or w_result(2) or w_result(3)
+        or w_result(4) or w_result(5) or w_result(6) or w_result(7)); 
+     o_flags(1) <= w_result(7);
+     o_flags(2) <= not i_op(1) and w_Cout; --? What do I and with?
+     o_flags(3) <= not i_op(1) and not (w_sum(7) nor i_A(7)) and (i_A(7) nor i_B(7));
     
 
 end Behavioral;

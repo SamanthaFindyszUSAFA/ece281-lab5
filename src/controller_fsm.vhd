@@ -39,7 +39,30 @@ end controller_fsm;
 
 architecture FSM of controller_fsm is
 
+	type sm_state is (clear_display, first_num, second_num, result);
+	
+	-- Here you create variables that can take on the values defined above. Neat!	
+	signal current_state: sm_state := clear_display; 
+	signal next_state: sm_state:= clear_display;
 begin
+    next_state <=  sm_state'succ(current_state) when (current_state /= result) else -- going up
+               clear_display;
+    
+    -- Output logic
+	with current_state select
+	o_cycle <= "1000" when result,
+	           "0100" when second_num,
+	           "0010" when first_num,
+	           "0001" when others;
+
+	state_register : process(i_adv, i_reset)
+	begin
+	    if i_reset = '1' then
+           current_state <= clear_display;
+        elsif rising_edge(i_adv) then
+           current_state <= next_state;
+        end if;
+	end process state_register;
 
 
 end FSM;
