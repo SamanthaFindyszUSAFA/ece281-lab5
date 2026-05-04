@@ -171,7 +171,7 @@ begin
         generic map ( k_WIDTH =>  k_IO_WIDTH )
         port map ( 
            i_clk   => w_clk,
-           i_reset => '0',
+           i_reset => btnU,
            i_D3    => w_sign,
            i_D2    => w_hund,
            i_D1    => w_tens,
@@ -243,11 +243,11 @@ begin
 	-- CONCURRENT STATEMENTS ----------------------------
 	with w_sel select 
         w_display <= --"1110000" when others;
-         not w_negative_sign_output when "0111", 
+         not w_negative_sign_output when "0111",
          --not w_seven_seg_output when others;
          "0001110" when others;
          
-    --seg <= w_display;
+    seg <= w_display;
          
    	with w_cycle select 
         w_twos_comp_input <=  
@@ -260,8 +260,8 @@ begin
    w_reset <= '1' when(btnU = '1') else 
    '0';
    
-    an(0) <= '0';
-    --an(0) <= '0' when (w_sel = "1110") else '1';
+    --an(0) <= '0';
+    an(0) <= '0' when (w_sel = "1110") else '1';
     an(1) <= '0' when (w_sel = "1101") else '1';
     an(2) <= '0' when (w_sel = "1011") else '1';
     an(3) <= '0' when (w_sel = "0111") else '1';
