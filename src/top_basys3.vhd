@@ -123,7 +123,7 @@ architecture top_basys3_arch of top_basys3 is
     constant k_IO_WIDTH : natural := 4;
     
     signal w_clk : std_logic;		--this wire provides the connection between o_clk and TDM4 clk
-    signal w_cycle : STD_LOGIC_VECTOR (3 downto 0) := "0001";
+    signal w_cycle : STD_LOGIC_VECTOR(3 downto 0) := "0001";
     signal w_btnC : std_logic;
 
     signal w_twos_comp_input : STD_LOGIC_VECTOR (7 downto 0);
@@ -194,21 +194,21 @@ begin
             o_flags(0) => led(12)
         );
         
-    cycle_inst_A: cycle
-        port map( 
-            i_input => sw,
-            i_reset => w_reset,
-            i_cycle => w_cycle(1),
-            o_output => w_load_A
-        );
+    --cycle_inst_A: cycle
+        --port map( 
+            --i_input => sw,
+            --i_reset => w_reset,
+            --i_cycle => w_cycle(1 downto 1),
+            --o_output => w_load_A
+        --);
         
-    cycle_inst_B: cycle
-        port map( 
-            i_input => sw,
-            i_reset => w_reset,
-            i_cycle => w_cycle(2),
-            o_output => w_load_B
-        );
+    --cycle_inst_B: cycle
+        --port map( 
+            --i_input => sw,
+            --i_reset => w_reset,
+            --i_cycle => w_cycle(2 downto 2),
+            --o_output => w_load_B
+        --);
         
     controller_fsm_inst: controller_fsm
         port map( 
@@ -274,6 +274,26 @@ begin
     --led(1) <= '1' when (w_cycle = "0010") else '0';
     --led(0) <= '1' when (w_cycle = "0001") else '0';
     
+    load_A : process(w_cycle(1), w_reset)
+	begin
+	   if w_reset = '1' then
+	       w_load_A <= "00000000";
+	   
+       elsif rising_edge(w_cycle(1)) then --???
+           w_load_A <= sw;
+       end if;
+	end process load_A;
+	
+	
+	load_B : process(w_cycle(2), w_reset)
+	begin
+	   if w_reset = '1' then
+	       w_load_B <= "00000000";
+	   
+       elsif rising_edge(w_cycle(2)) then --???
+           w_load_B <= sw;
+       end if;
+	end process load_B;
 	
 	
 end top_basys3_arch;
