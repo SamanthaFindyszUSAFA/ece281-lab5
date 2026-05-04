@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="top_basys3_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="top_basys3_tb" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0.000 ns"></ZoomStartTime>
+      <ZoomEndTime time="2,593.349 ns"></ZoomEndTime>
+      <Cursor1Time time="400.000 ns"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="146"></NameColumnWidth>
+      <ValueColumnWidth column_width="134"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="11" />
+   <wvobject fp_name="/top_basys3_tb/sw" type="array">
+      <obj_property name="ElementShortName">sw[7:0]</obj_property>
+      <obj_property name="ObjectShortName">sw[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/top_basys3_tb/btnU" type="logic">
+      <obj_property name="ElementShortName">btnU</obj_property>
+      <obj_property name="ObjectShortName">btnU</obj_property>
+   </wvobject>
+   <wvobject fp_name="/top_basys3_tb/btnC" type="logic">
+      <obj_property name="ElementShortName">btnC</obj_property>
+      <obj_property name="ObjectShortName">btnC</obj_property>
+   </wvobject>
+   <wvobject fp_name="/top_basys3_tb/btnL" type="logic">
+      <obj_property name="ElementShortName">btnL</obj_property>
+      <obj_property name="ObjectShortName">btnL</obj_property>
+   </wvobject>
+   <wvobject fp_name="/top_basys3_tb/led" type="array">
+      <obj_property name="ElementShortName">led[15:0]</obj_property>
+      <obj_property name="ObjectShortName">led[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/top_basys3_tb/seg" type="array">
+      <obj_property name="ElementShortName">seg[6:0]</obj_property>
+      <obj_property name="ObjectShortName">seg[6:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/top_basys3_tb/an" type="array">
+      <obj_property name="ElementShortName">an[3:0]</obj_property>
+      <obj_property name="ObjectShortName">an[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/top_basys3_tb/uut/w_cycle" type="array">
+      <obj_property name="ElementShortName">w_cycle[3:0]</obj_property>
+      <obj_property name="ObjectShortName">w_cycle[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/top_basys3_tb/uut/w_display" type="array">
+      <obj_property name="ElementShortName">w_display[6:0]</obj_property>
+      <obj_property name="ObjectShortName">w_display[6:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/top_basys3_tb/uut/w_sel" type="array">
+      <obj_property name="ElementShortName">w_sel[3:0]</obj_property>
+      <obj_property name="ObjectShortName">w_sel[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/top_basys3_tb/w_clk" type="logic">
+      <obj_property name="ElementShortName">w_clk</obj_property>
+      <obj_property name="ObjectShortName">w_clk</obj_property>
+   </wvobject>
+</wave_config>

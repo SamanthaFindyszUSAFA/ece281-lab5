@@ -84,7 +84,9 @@ begin
         or w_result(4) or w_result(5) or w_result(6) or w_result(7)); 
      o_flags(3) <= w_result(7);
      o_flags(1) <= not i_op(1) and w_Cout; --? What do I and with?
-     o_flags(0) <= not i_op(1) and not (w_sum(7) nor i_A(7) nor i_B(7)) and (i_A(7) nor i_B(7));
+     o_flags(0) <= not i_op(1) and not (w_sum(7) nor i_A(7)) and (i_A(7) nor i_B(7));
+    
+     --o_flags(0) <= not i_op(1) and not (w_sum(7) nor i_A(7) nor i_B(7)) and (i_A(7) nor i_B(7));
     
 
 end Behavioral;
