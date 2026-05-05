@@ -245,7 +245,7 @@ begin
         w_display <= --"1110000" when others;
          not w_negative_sign_output when "0111",
          --not w_seven_seg_output when others;
-         "0001110" when others;
+         w_seven_seg_output when others; --"0001110" when others;
          
     seg <= w_display;
          

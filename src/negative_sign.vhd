@@ -42,9 +42,9 @@ architecture Behavioral of negative_sign is
 
 begin
     with i_Hex select
-    w_seg   <=  "1111110" when "0000",
-                "0000001" when "0001",
-                "0000000" when others;
+    w_seg   <=  "1111111" when "0000", --"1111110" when "0000",
+                "1111110" when "0001", --"0000001" when "0001",
+                "1111111" when others; --"0000000" when others;
     -- Flipped mapping to o_seg_n to match constraints file
     -- Invert w_seg because the cathodes are active LOW
     o_seg_n(0) <= not w_seg(6); -- Sa
