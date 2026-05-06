@@ -65,25 +65,26 @@ begin
             Cout => w_Cout
         ); 
     
+    with i_op(0) select 
+        w_B <=  
+         (not i_B) when '1', 
+         (i_B) when others;
+    
+    
    	with i_op(1 downto 0) select 
         w_result <=  
          (i_A or i_B) when "11", 
          (i_A and i_B) when "10",   
           w_sum when others;
         
-    with i_op(0) select 
-        w_B <=  
-         (not i_B) when '1', 
-         (i_B) when others;
          
     o_result <= w_result;
         
-        --switch o_flags to w_flags
-        --or each together and then not them
+
+     o_flags(3) <= w_result(7);
      o_flags(2) <= not (w_result(0) or w_result(1) or w_result(2) or w_result(3)
         or w_result(4) or w_result(5) or w_result(6) or w_result(7)); 
-     o_flags(3) <= w_result(7);
-     o_flags(1) <= not i_op(1) and w_Cout; --? What do I and with?
+     o_flags(1) <= not i_op(1) and w_Cout; 
      o_flags(0) <= not i_op(1) and (w_sum(7) xor i_A(7)) and not (i_A(7) xor i_B(7) xor i_op(0));
     
     

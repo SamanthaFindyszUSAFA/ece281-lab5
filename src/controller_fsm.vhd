@@ -41,7 +41,6 @@ architecture FSM of controller_fsm is
 
 	type sm_state is (clear_display, first_num, second_num, result);
 	
-	-- Here you create variables that can take on the values defined above. Neat!	
 	signal current_state: sm_state := clear_display; 
 	signal next_state: sm_state:= clear_display;
 begin

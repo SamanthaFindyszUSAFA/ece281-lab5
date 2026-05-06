@@ -143,10 +143,7 @@ architecture top_basys3_arch of top_basys3 is
     signal w_seven_seg_decoder_input : STD_LOGIC_VECTOR (k_IO_WIDTH - 1 downto 0);
     signal w_seven_seg_output : STD_LOGIC_VECTOR (6 downto 0);
     signal w_negative_sign_output : STD_LOGIC_VECTOR (6 downto 0);
-    --signal w_segment_output : STD_LOGIC_VECTOR (6 downto 0);
-    --signal w_xF : STD_LOGIC_VECTOR (3 downto 0) := "1111";
-  
-    signal w_reset : std_logic;
+
 begin
 	-- PORT MAPS ----------------------------------------
     --Complete the clock_divider portmap below based on the design provided	
@@ -194,25 +191,10 @@ begin
             o_flags(0) => led(12)
         );
         
-    --cycle_inst_A: cycle
-        --port map( 
-            --i_input => sw,
-            --i_reset => w_reset,
-            --i_cycle => w_cycle(1 downto 1),
-            --o_output => w_load_A
-        --);
-        
-    --cycle_inst_B: cycle
-        --port map( 
-            --i_input => sw,
-            --i_reset => w_reset,
-            --i_cycle => w_cycle(2 downto 2),
-            --o_output => w_load_B
-        --);
         
     controller_fsm_inst: controller_fsm
         port map( 
-            i_reset => w_reset,
+            i_reset => btnU,
             i_adv => w_btnC,
             o_cycle => w_cycle
         );
@@ -227,7 +209,7 @@ begin
     button_debounce_inst: button_debounce
         port map(
             clk => clk,
-            reset => '0', --btnU?
+            reset => '0', 
             button => btnC,
             action => w_btnC
         );
@@ -242,10 +224,9 @@ begin
 	
 	-- CONCURRENT STATEMENTS ----------------------------
 	with w_sel select 
-        w_display <= --"1110000" when others;
+        w_display <= 
          not w_negative_sign_output when "0111",
-         --not w_seven_seg_output when others;
-         w_seven_seg_output when others; --"0001110" when others;
+         w_seven_seg_output when others; 
          
     seg <= w_display;
          
@@ -257,10 +238,7 @@ begin
          "00000000" when others;
 
    
-   w_reset <= '1' when(btnU = '1') else 
-   '0';
    
-    --an(0) <= '0';
     an(0) <= '0' when (w_sel = "1110") else '1';
     an(1) <= '0' when (w_sel = "1101") else '1';
     an(2) <= '0' when (w_sel = "1011") else '1';
@@ -272,28 +250,25 @@ begin
     led(2) <= w_cycle(2);
     led(1) <= w_cycle(1);
     led(0) <= w_cycle(0);
-    --led(3) <= '1' when (w_cycle = "1000") else '0';
-    --led(2) <= '1' when (w_cycle = "0100") else '0';
-    --led(1) <= '1' when (w_cycle = "0010") else '0';
-    --led(0) <= '1' when (w_cycle = "0001") else '0';
+
     
-    load_A : process(w_cycle(1), w_reset)
+    load_A : process(w_cycle(1), btnU)
 	begin
-	   if w_reset = '1' then
+	   if btnU = '1' then
 	       w_load_A <= "00000000";
 	   
-       elsif rising_edge(w_cycle(1)) then --???
+       elsif rising_edge(w_cycle(1)) then 
            w_load_A <= sw;
        end if;
 	end process load_A;
 	
 	
-	load_B : process(w_cycle(2), w_reset)
+	load_B : process(w_cycle(2), btnU)
 	begin
-	   if w_reset = '1' then
+	   if btnU = '1' then
 	       w_load_B <= "00000000";
 	   
-       elsif rising_edge(w_cycle(2)) then --???
+       elsif rising_edge(w_cycle(2)) then 
            w_load_B <= sw;
        end if;
 	end process load_B;
